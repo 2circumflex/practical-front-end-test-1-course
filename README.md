@@ -6,7 +6,8 @@
 
 ## 강의 자료
 
-https://drive.google.com/drive/folders/1rfqMh5gnJDVM4KMbibaFYDkkWJ6khwuv?usp=drive_link
+- [실무에 바로 적용하는 프런트엔드 테스트 쇼핑몰 예제 저장소](https://github.com/practical-fe-testing/test-example-shopping-mall)
+- [PDF 자료](https://drive.google.com/drive/folders/1rfqMh5gnJDVM4KMbibaFYDkkWJ6khwuv?usp=drive_link)
 
 ## 커리큘럼
 
