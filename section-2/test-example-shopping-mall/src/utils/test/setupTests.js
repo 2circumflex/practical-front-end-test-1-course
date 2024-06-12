@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom';
+// DOM에 관련된 단언을 편리하게 실행할 수 있도록 @testing-library/jest-dom을 추가하여 매처를 확장한 것
 
 afterEach(() => {
   vi.clearAllMocks();

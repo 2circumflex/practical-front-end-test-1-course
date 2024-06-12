@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [react(), eslint({ exclude: ['/virtual:/**', 'node_modules/**'] })],
   test: {
     globals: true,
-    environment: 'jsdom',
+    environment: 'jsdom', // https://github.com/jsdom/jsdom
     setupFiles: './src/utils/test/setupTests.js',
   },
   resolve: {

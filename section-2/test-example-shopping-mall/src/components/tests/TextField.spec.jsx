@@ -22,7 +22,40 @@ it('className prop으로 설정한 css class가 적용된다.', async () => {
 
   // className이란 내부 prop이나 state 값을 검증 (X)
   // 렌더링되는 DOM 구조가 올바르게 변경되었는지 확인 (O) -> 최종적으로 사용자가 보는 결과는 DOM
-  expect(screen.getByPlaceholderText('텍스트를 입력해 주세요.')).toHaveClass(
-    'my-class',
-  );
+  const textInput = screen.getByPlaceholderText('텍스트를 입력해 주세요.');
+
+  // DOM 구조를 확인할 수 있음
+  screen.debug();
+
+  expect(textInput).toHaveClass('my-class');
+});
+
+describe('placeholder', () => {
+  /**
+   * it('should ~~~');
+   * test('if ~~~');
+   */
+
+  // it -> test 함수의 alias
+  it('기본 placeholder "텍스트를 입력해 주세요."가 노출된다.', async () => {
+    // 기대결과 === 실제, 결과 -> 성공
+    // 기대결과 !== 실제, 결과 -> 실패
+    await render(<TextField />);
+
+    const textInput = screen.getByPlaceholderText('텍스트를 입력해 주세요.');
+
+    expect(textInput).toBeInTheDocument();
+    // 단언(assertion) -> 테스트가 통과하기 위한 조건 -> 검증 실행
+
+    // https://vitest.dev/api/expect.html
+    // vitest 공식 홈페이지를 들어와 보면 expect 함수를 통해 사용할 수 있는 다양한 매처를 확인 가능
+  });
+
+  it('placeholder props에 따라 placeholder가 변경된다', async () => {
+    await render(<TextField placeholder="상품명을 입력해 주세요." />);
+
+    const textInput = screen.getByPlaceholderText('상품명을 입력해 주세요.');
+
+    expect(textInput).toBeInTheDocument();
+  });
 });
