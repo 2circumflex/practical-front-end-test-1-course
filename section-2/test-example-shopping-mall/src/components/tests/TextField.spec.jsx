@@ -4,6 +4,35 @@ import React from 'react';
 import TextField from '@/components/TextField';
 import render from '@/utils/test/render';
 
+// Setup and Teardown : https://vitest.dev/api/#setup-and-teardown
+// beforeEach(() => {
+//   console.log('root - beforeEach');
+// });
+// beforeAll(() => {
+//   console.log('root - beforeAll');
+// });
+// afterEach(() => {
+//   console.log('root - afterEach');
+// });
+// afterAll(() => {
+//   console.log('root - afterAll');
+// });
+
+// my-class란 class가항상 적용된 컴포넌트를 렌더링
+// beforeEach(async () => {
+//   await render(<TextField className="my-class" />);
+// });
+
+// 아래처럼 파일 내에서 전역 변수를 사용하여 조건부로 동작을 분리하는 것은 좋지 않음
+// let someCondition = false;
+// beforeEach(async () => {
+//   if (someCondition) {
+//     await render(<TextField className="my-class" />);
+//   } else {
+//     // ...
+//   }
+// });
+
 it('className prop으로 설정한 css class가 적용된다.', async () => {
   // Arrange - 테스트를 위한 환경 만들기
   // -> className을 지닌 컴포넌트 렌더링
@@ -25,12 +54,16 @@ it('className prop으로 설정한 css class가 적용된다.', async () => {
   const textInput = screen.getByPlaceholderText('텍스트를 입력해 주세요.');
 
   // DOM 구조를 확인할 수 있음
-  screen.debug();
+  // screen.debug();
 
   expect(textInput).toHaveClass('my-class');
 });
 
 describe('placeholder', () => {
+  // beforeEach(() => {
+  //   console.log('placeholder - beforeEach');
+  // });
+
   /**
    * it('should ~~~');
    * test('if ~~~');
