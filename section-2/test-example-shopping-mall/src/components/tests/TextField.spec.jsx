@@ -92,3 +92,59 @@ describe('placeholder', () => {
     expect(textInput).toBeInTheDocument();
   });
 });
+
+it('텍스트를 입력하면 onChange prop으로 등록한 함수가 호출된다.', async () => {
+  // 쿼리 및 우선순위 : https://testing-library.com/docs/queries/about/#priority
+
+  const spy = vi.fn(); // 스파이 함수
+  // 스파이 함수 : 테스트 코드에서 특정 함수가 호출되었는지, 함수의 인자로 어떤 것이 넘어왔는지 어떤 값을 반환하는지 등 다양한 값들을 저장
+  const { user } = await render(<TextField onChange={spy} />);
+
+  const textInput = screen.getByPlaceholderText('텍스트를 입력해 주세요.');
+
+  await user.type(textInput, 'test');
+
+  expect(spy).toHaveBeenCalledWith('test');
+});
+
+it('엔터키를 입력하면 onEnter prop으로 등록한 함수가 호출된다', async () => {
+  const spy = vi.fn();
+
+  const { user } = await render(<TextField onEnter={spy} />);
+
+  const textInput = screen.getByPlaceholderText('텍스트를 입력해 주세요.');
+
+  await user.type(textInput, 'test{Enter}');
+
+  expect(spy).toHaveBeenCalledWith('test');
+});
+
+it('포커스가 활성화되면 onFocus prop으로 등록한 함수가 호출된다.', async () => {
+  // 포커스 활성화
+  // 탭 키로 인풋 요소로 포커스 이동
+  // 인풋 요소를 클릭했을때
+  // textInput.focus()로 직접 발생
+  const spy = vi.fn();
+  const { user } = await render(<TextField onFocus={spy} />);
+
+  const textInput = screen.getByPlaceholderText('텍스트를 입력해 주세요.');
+
+  await user.click(textInput);
+  // click과 연관 -> 포커스, 마우스다운, 마우스업 등...
+
+  expect(spy).toHaveBeenCalled();
+});
+
+it('포커스가 활성화되면 border 스타일이 추가된다.', async () => {
+  const { user } = await render(<TextField />);
+
+  const textInput = screen.getByPlaceholderText('텍스트를 입력해 주세요.');
+
+  await user.click(textInput);
+
+  expect(textInput).toHaveStyle({
+    borderWidth: '2px',
+    borderColor: 'rgb(25, 118, 210)',
+  });
+  // https://www.inflearn.com/questions/1130563/2-4%EC%9E%A5-%EB%A7%88%EC%A7%80%EB%A7%89-border-%EC%8A%A4%ED%83%80%EC%9D%BC-%EA%B2%80%EC%A6%9D-%EC%8B%9C-%EC%A7%88%EB%AC%B8
+});
