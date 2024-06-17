@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
 import React from 'react';
 
 import TextField from '@/components/TextField';
@@ -128,6 +128,14 @@ it('포커스가 활성화되면 onFocus prop으로 등록한 함수가 호출�
   const { user } = await render(<TextField onFocus={spy} />);
 
   const textInput = screen.getByPlaceholderText('텍스트를 입력해 주세요.');
+
+  // fireEvent를 사용하면 포커스 이벤트가 발생하지 않아서 테스트 실패함
+  // fireEvent의 클릭은 단순하게 클릭 이벤트만 발생시킬뿐, 그 외에 연쇄적으로 발생하는 이벤트에 대해서는 전혀 고려되지 않기 때문
+  // 사용자가 실제 요소를 클릭할 때 pointerdown, mousedown, pointerup, mouseup, click, focus 등의 이벤트가 연쇄적으로 발생
+  // 유저이벤트는 이러한 시나리오까지 모두 고려가 되어 있기 때문에 실제 상황과 유사하게 테스트코드 작성 가능
+  // 유저이벤트로 작성하는 것을 권장
+  // 하지만 스크롤 이벤트처럼 종종 유저이벤트에서 제공되지 않는 사례를 테스트하거나 단순한 컴포넌트 검증일 경우 fireEvent를 사용
+  // await fireEvent.click(textInput);
 
   await user.click(textInput);
   // click과 연관 -> 포커스, 마우스다운, 마우스업 등...
