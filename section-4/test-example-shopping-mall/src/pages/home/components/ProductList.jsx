@@ -18,14 +18,18 @@ const PRODUCT_PAGE_LIMIT = 20;
 // API 호출 -> 여러 컴포넌트가 조합된 영역에서 발생 -> 통합 테스트 검증 필요
 const ProductList = ({ limit = PRODUCT_PAGE_LIMIT }) => {
   const navigate = useNavigate();
+  // 상품 목록 조회를 위해 필요한 필터 조건(스토어에서 조회)
   const filter = useFilterStore(state =>
     pick(state, 'categoryId', 'title', 'minPrice', 'maxPrice'),
   );
+  // 로그인 여부, 사용자 정보 조회(스토어에서 조회)
   const { user, isLogin } = useUserStore(state =>
     pick(state, 'user', 'isLogin'),
   );
+  // 장바구니 상품 추가 액션(스토터에서 조회)
   const { addCartItem } = useCartStore(state => pick(state, 'addCartItem'));
 
+  // Tanstack Query를 통한 상품 목록 API 호출
   const { data, ...productsMethods } = useProducts({
     limit,
     params: filter,
