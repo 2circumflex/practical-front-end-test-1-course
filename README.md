@@ -17,5 +17,5 @@
 | 01   | [프런트엔드 테스트 작성 준비하기](./section-1/README.md) |
 | 02   | [단위 테스트란?](./section-2/README.md)                  |
 | 03   | [단위 테스트 작성하기](./section-3/README.md)            |
-| 04   | 통합 테스트란?                                           |
-| 05   | 통합 테스트 작성하기                                     |
+| 04   | [통합 테스트란?](./section-4/README.md)                  |
+| 05   | [통합 테스트 작성하기](./section-5/README.md)            |
